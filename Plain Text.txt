@@ -1,0 +1,53 @@
+def up():
+    setheading(90)
+    forward(40)
+    penup()
+
+def down():
+    setheading(270)
+    forward(40)
+    penup()
+
+def left():
+    setheading(180)
+    forward(40)
+    penup()
+
+def right():
+    setheading(0)
+    forward(40)
+    penup()
+def enter():
+    pendown()
+
+dots=Dots()
+dots.draw()
+onkey(up, 'Up')
+onkey(down, 'Down')
+onkey(left, 'Left')
+onkey(right, 'Right')
+
+onkey(up, 'w')
+onkey(down, 's')
+onkey(left, 'a')
+onkey(right, 'd')
+onkey(enter,'space')
+listen()
+done()
+
+		a=[0]*8	
+		c=[0]*8
+		d=[0]*8
+		e=[0]*8
+		f=[0]*8
+		g=[0]*8
+		h=[0]*8
+		i=[0]*8
+		self.b.append(a)
+		self.b.append(c)
+		self.b.append(d)
+		self.b.append(e)
+		self.b.append(f)
+		self.b.append(g)
+		self.b.append(h)
+		self.b.append(i)
