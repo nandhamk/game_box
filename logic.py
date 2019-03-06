@@ -62,20 +62,6 @@ class Logic:
 			b=148
 			penup()
 		goto(a,b)
-	
-	def boxing(self):
-		backward(40)
-		if(self.check_box()):
-			a,b=pos()
-			penup()
-			goto(a,b)
-			pendown()
-			bengin_fill()
-			for i in range(0,4):
-				right(90)
-				forward(40)
-			end_fill()
-				
 		
 	def dot(self,x,y):
 		o_x=int(abs(-147-x)/40)
@@ -83,18 +69,6 @@ class Logic:
 		c=self.b[o_y]
 		c[o_x]=1
 
-	def check_box(self):
-		a,b=pos()
-		o_x=int(abs(-147-x)/40)
-		o_y=int((148-y)/4)
-		c=self.b[o_y]
- 		if((c[o_x]==1) and (self.count<5)):
-			left(90)
-			backward(40)
-			self.count+=1
-			self.check_box()
-		else:
-			return True
 	
 logic=Logic()
 dots=Dots()
