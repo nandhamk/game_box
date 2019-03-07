@@ -49,19 +49,43 @@ class Logic:
 		pendown()
 
 	def wall1(self,a,b):
+		check=0
 		if(a<(-147)):
 			a=133
+			check=1
 			penup()
 		if(a>133):
+			check=2
 			a=-147
 			penup()
 		if(b>148):
 			b=-132
+			check=3
 			penup()
 		if(b<(-132)):
 			b=148
+			check=4
 			penup()
 		goto(a,b)
+		if(check==1):
+			a=-147
+			self.zero(a,b)
+		elif(check==2):
+			a=133
+			self.zero(a,b)
+		elif(check==3):
+			b=148
+			self.zero(a,b)
+		elif(check==4):
+			b=-132
+			self.zero(a,b)
+
+	def zero(self,x,y):
+		o_x=int(abs(-147-x)/40)
+		o_y=int((148-y)/40)
+		print(o_x,o_y)
+		c=self.b[o_y]
+		c[o_x]=0		
 		
 	def dot(self,x,y):
 		o_x=int(abs(-147-x)/40)
