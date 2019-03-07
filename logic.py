@@ -4,7 +4,7 @@ class Logic:
 	b=[]
 	z=0
 	count=0
-	def i(self):
+	def i(self): 
 		for i in range(0,8):
 			a=[0]*8
 			self.b.append(a)
@@ -47,6 +47,7 @@ class Logic:
 		self.dot(a,b)
 		print(self.b)	    
 		pendown()
+		self.fill_box()
 
 	def wall1(self,a,b):
 		check=0
@@ -79,7 +80,41 @@ class Logic:
 		elif(check==4):
 			b=-132
 			self.zero(a,b)
+	def fill_box(self):
+		draw=0
+		a,b=pos()
+		if(self.check_one(a,b)):
+			backward(40)
+			left(90)
+			a,b=pos()
+			if(self.check_one(a,b)):
+				backward(40)
+				left(90)
+				a,b=pos()
+				if(self.check_one(a,b)):
+					backward(40)
+					left(90)
+					a,b=pos()
+					if(self.check_one(a,b)):
+						backward(40)
+						left(90)
+						draw=1
+		if(draw==1):
+			begin_fill()
+			for i in range(0,4):
+				backward(40)
+				left(90)
+			end_fill()
+		
 
+	def check_one(self,x,y):
+		o_x=int(abs(-147-x)/40)
+		o_y=int((148-y)/40)
+		c=self.b[o_y]
+		if(c[o_x]==1):
+			return True
+		else:
+			return False	
 	def zero(self,x,y):
 		o_x=int(abs(-147-x)/40)
 		o_y=int((148-y)/40)
