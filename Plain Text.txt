@@ -51,3 +51,12 @@ done()
 		self.b.append(g)
 		self.b.append(h)
 		self.b.append(i)
+
+
+
+
+
+
+
+ horizontal line=> 8*7=56
+ vertical line=> 8*7=56
