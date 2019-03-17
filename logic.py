@@ -12,6 +12,9 @@ class Logic:
 	box_yellow=0
 	color=["blue",'red',"green","yellow"]
 	co=0
+	player=0
+	def __init__(self,p):
+		self.player=p
 	def i(self):
 		for i in range(0,8):
 			a=[0]*8
@@ -100,22 +103,29 @@ class Logic:
 		x,y=pos()
 		o_x=int(abs(-147-x)/40)
 		o_y=int((148-y)/40)
+		double_box=0
 		if(self.h_line[o_y][o_x]):
 			if(self.v_line[o_y][o_x+1]):
 				if(self.h_line[o_y+1][o_x]):
 					if(self.v_line[o_y][o_x]):
 						self.draw_box(0)
+						double_box+=1
 
 		if(self.h_line[o_y][o_x-1]):
 			if(self.v_line[o_y][o_x-1]):
 				if(self.h_line[o_y+1][o_x-1]):
 					if(self.v_line[o_y][o_x]):
 						self.draw_box(270)
+						double_box+=1
+	
+		if(double_box==2):
+			self.co+=1
 
 	def fill_box_down(self):
 		x,y=pos()
 		o_x=int(abs(-147-x)/40)
 		o_y=int((148-y)/40)
+		double_box=0
 		if(self.h_line[o_y][o_x]):
 			print(o_y,o_x)
 			if(self.v_line[o_y-1][o_x+1]):
@@ -125,6 +135,7 @@ class Logic:
 					if(self.v_line[o_y-1][o_x]):
 						print(o_y-1,o_x)
 						self.draw_box(90)
+						double_box+=1
 						print("down sucess1")
 
 		if(self.h_line[o_y][o_x-1]):
@@ -136,12 +147,17 @@ class Logic:
 					if(self.v_line[o_y-1][o_x]):
 						print(o_y-1,o_x)
 						self.draw_box(180)
+						double_box+=1
 						print("dowm sucess2")
+
+		if(double_box==2):
+			self.co+=1
 
 	def fill_box_left(self):
 		x,y=pos()
 		o_x=int(abs(-147-x)/40)
 		o_y=int((148-y)/40)
+		double_box=0
 		if(self.v_line[o_y][o_x]):
 			print(o_y,o_x)
 			if(self.h_line[o_y+1][o_x]):
@@ -151,6 +167,7 @@ class Logic:
 					if(self.h_line[o_y][o_x]):
 						print(o_y,o_x)
 						self.draw_box(0)
+						double_box+=1
 						print("left sucess1")
 
 		if(self.v_line[o_y-1][o_x]):
@@ -162,12 +179,16 @@ class Logic:
 					if(self.h_line[o_y][o_x]):
 						print(o_y,o_x)
 						self.draw_box(90)
+						double_box+=1
 						print("left sucess 2")
+		if(double_box==2):
+			self.co+=1
 
 	def fill_box_right(self):
 		x,y=pos()
 		o_x=int(abs(-147-x)/40)
 		o_y=int((148-y)/40)
+		double_box=0		
 		#top right
 		if(self.v_line[o_y][o_x]==1):
 			print(o_y,o_x)
@@ -177,6 +198,7 @@ class Logic:
 					print(o_y,o_x-1)
 					if(self.h_line[o_y][o_x-1]==1):
 						print(o_y,o_x-1)
+						double_box+=1
 						self.draw_box(270)
 		#down right
 		if(self.v_line[o_y-1][o_x]==1):
@@ -188,6 +210,9 @@ class Logic:
 					if(self.h_line[o_y][o_x-1]==1):
 						print(o_y,o_x-1)
 						self.draw_box(180)
+						double_box+=1
+		if(double_box==2):
+			self.co+=1
 		
 
 	def draw_box(self,dir):
@@ -240,7 +265,8 @@ class Logic:
 		fillcolor(cor[1])
 		goto(x,y)
 		showturtle()
-		self.co-=1	
+		self.co-=1
+		print(self.co)	
 		
 	def dot(self,x,y):
 		o_x=int(abs(-147-x)/40)
@@ -268,12 +294,14 @@ class Logic:
 
 	def color_change(self):
 		self.co+=1
-		length=len(self.color)
+		length=self.player
 		value=self.co%length
 		fillcolor(self.color[value])
-	
-logic=Logic()
-dots=Dots()
+player=0
+while(player<2 or player>=5):
+	player=int(input("enter the no of players(2 to 4) : "))	
+logic=Logic(player)
+dots=Dots(player)
 dots.draw()
 logic.i()
 logic.listening()
